@@ -24,7 +24,7 @@ int main()
         // Remove the top element
         numberStack.Pop();
     }
-    cout << "nullptr" << endl;
+    cout << "nullptr" << m_count << endl;
 
     return 0;
 }

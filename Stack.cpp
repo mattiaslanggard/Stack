@@ -6,7 +6,7 @@ template <typename T>
 Stack<T>::Stack()
     : m_count(0), m_top(nullptr)
 {
-    // Here we would put other rules that should apply
+    // incoming
 }
 
 template <typename T>
