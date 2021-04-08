@@ -22,12 +22,12 @@ int main()
     if (result == true)
     {
         cout << "The value 59 exists in the stack!" << endl;
+        cout << "Replacing the first element with the value of 59 to 44." << endl;
     }
     else
     {
         cout << "The value 59 does NOT exist in the stack!" << endl;
     }
-    cout << "Replacing the first element with the value of 59 to 44." << endl;
     result = false;
     result = numberStack.ReplaceFirstValue(59, 44);
     if (result == true)

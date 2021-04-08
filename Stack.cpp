@@ -19,6 +19,10 @@ bool Stack<T>::IsEmpty()
 template <typename T>
 T Stack<T>::Top()
 {
+    if (m_top == nullptr)
+    {
+        return 0;
+    }
     // Just return the value of m_top node
     return m_top->Value;
 }
@@ -65,8 +69,21 @@ bool Stack<T>::ReplaceFirstValue(T searchValue, T newValue)
     Stack<T> tmpStack = Stack<T>();         //create a temporary stack
     while (Stack<T>::Top() != searchValue)
     {
+        if (Stack<T>::m_count == 0)
+        {
+            break;
+        }
         tmpStack.Push(Stack<T>::Top());     //push the top value from main stack into temp stack
         Stack<T>::Pop();                    //pop node from main stack
+    }
+    if (Stack<T>::m_count == 0)
+    {
+        while (tmpStack.m_count != 0)
+        {
+            Stack<T>::Push(tmpStack.Top()); //return top node from temp stack to main stack
+            tmpStack.Pop();                 //pop node from temp stack
+        }
+        return false;
     }
     if (Stack<T>::Top() == searchValue)
     {
@@ -84,24 +101,33 @@ template<typename T>
 bool Stack<T>::IsExistingValue(T searchValue)
 {
     Stack<T> tmpStack = Stack<T>();         //create a temporary stack
-    while (Stack<T>::Top() != searchValue)
+    while (Stack<T>::m_count != 0)
     {
         tmpStack.Push(Stack<T>::Top());     //push the top value from main stack into temp stack
         Stack<T>::Pop();                    //pop node from main stack
-    }
-    if (Stack<T>::Top() == searchValue)
-    {
-        while (tmpStack.m_count != 0)
+        if (Stack<T>::Top() == searchValue)
         {
-            Stack<T>::Push(tmpStack.Top()); //return top node from temp stack to main stack
-            tmpStack.Pop();                 //pop node from temp stack
+            while (tmpStack.m_count != 0)
+            {
+                Stack<T>::Push(tmpStack.Top()); //return top node from temp stack to main stack
+                tmpStack.Pop();                 //pop node from temp stack
+            }
+            return true;
         }
-        return true;
+    }
+    while (tmpStack.m_count != 0)
+    {
+        Stack<T>::Push(tmpStack.Top()); //return top node from temp stack to main stack
+        tmpStack.Pop();                 //pop node from temp stack
+    }
+    if (Stack<T>::m_count == 0)
+    {
+        return false;
     }
 }
 
 template<typename T>
-void Stack<T>::PrintStack()
+void Stack<T>::PrintStack()                 //made a printstack method for optimization
 {
     Stack<T> tmpStack = Stack<T>();         //create a temporary stack
     while (!Stack<T>::IsEmpty())
