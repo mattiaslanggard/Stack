@@ -11,7 +11,8 @@ public:
     T Top();
     void Push(T val);
     void Pop();
-
+    bool ReplaceFirstValue(T val, T val1);
+    bool IsExistingValue(T val);
 private:
     int m_count;
     Node<T>* m_top;

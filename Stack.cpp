@@ -58,3 +58,35 @@ void Stack<T>::Pop()
     // One item is removed
     m_count--;
 }
+
+template<typename T>
+bool Stack<T>::ReplaceFirstValue(T searchValue, T newValue)
+{
+    int count = m_count;
+    if (count == 0)
+    {
+        return false;
+    }
+    if (m_top->Value == searchValue)
+    {
+        m_top->Value = newValue;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template<typename T>
+bool Stack<T>::IsExistingValue(T searchValue)
+{
+    while (Stack<T>::Top() != searchValue)
+    {
+        Stack<T>::Pop();
+    }
+    if (Stack<T>::Top() == searchValue)
+    {
+        return true;
+    }
+}
