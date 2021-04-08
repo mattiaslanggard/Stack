@@ -105,6 +105,7 @@ bool Stack<T>::IsExistingValue(T searchValue)
     {
         tmpStack.Push(Stack<T>::Top());     //push the top value from main stack into temp stack
         Stack<T>::Pop();                    //pop node from main stack
+
         if (Stack<T>::Top() == searchValue)
         {
             while (tmpStack.m_count != 0)
