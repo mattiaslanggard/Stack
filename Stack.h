@@ -13,6 +13,7 @@ public:
     void Pop();
     bool ReplaceFirstValue(T val, T val1);
     bool IsExistingValue(T val);
+    void PrintStack();
 private:
     int m_count;
     Node<T>* m_top;

@@ -62,31 +62,58 @@ void Stack<T>::Pop()
 template<typename T>
 bool Stack<T>::ReplaceFirstValue(T searchValue, T newValue)
 {
-    int count = m_count;
-    if (count == 0)
+    Stack<T> tmpStack = Stack<T>();         //create a temporary stack
+    while (Stack<T>::Top() != searchValue)
     {
-        return false;
+        tmpStack.Push(Stack<T>::Top());     //push the top value from main stack into temp stack
+        Stack<T>::Pop();                    //pop node from main stack
     }
-    if (m_top->Value == searchValue)
+    if (Stack<T>::Top() == searchValue)
     {
-        m_top->Value = newValue;
+        m_top->Value = newValue;            //change value of top (which is searchValue) to newValue
+        while (tmpStack.m_count != 0)       //while temp stack is not empty
+        {
+            Stack<T>::Push(tmpStack.Top()); //return top node from temp stack to main stack
+            tmpStack.Pop();                 //pop node from temp stack
+        }
         return true;
-    }
-    else
-    {
-        return false;
     }
 }
 
 template<typename T>
 bool Stack<T>::IsExistingValue(T searchValue)
 {
+    Stack<T> tmpStack = Stack<T>();         //create a temporary stack
     while (Stack<T>::Top() != searchValue)
     {
-        Stack<T>::Pop();
+        tmpStack.Push(Stack<T>::Top());     //push the top value from main stack into temp stack
+        Stack<T>::Pop();                    //pop node from main stack
     }
     if (Stack<T>::Top() == searchValue)
     {
+        while (tmpStack.m_count != 0)
+        {
+            Stack<T>::Push(tmpStack.Top()); //return top node from temp stack to main stack
+            tmpStack.Pop();                 //pop node from temp stack
+        }
         return true;
+    }
+}
+
+template<typename T>
+void Stack<T>::PrintStack()
+{
+    Stack<T> tmpStack = Stack<T>();         //create a temporary stack
+    while (!Stack<T>::IsEmpty())
+    {
+        cout << m_top->Value << " - ";
+        tmpStack.Push(Stack<T>::Top());     //push the top value from main stack into temp stack
+        Stack<T>::Pop();                    //pop node from main stack
+    }
+    cout << "nullptr" << endl;
+    while (tmpStack.m_count != 0)
+    {
+        Stack<T>::Push(tmpStack.Top()); //return top node from temp stack to main stack
+        tmpStack.Pop();                 //pop node from temp stack
     }
 }
